@@ -2,6 +2,7 @@ const { test } = require("@playwright/test");
 
 let token;
 
+//second example with Before Each
 test.describe("GET Users", () => {
   test.beforeEach(async ({ request }) => {
     const respToken = await request.post("/auth/token", {
@@ -22,7 +23,7 @@ test.describe("GET Users", () => {
   });
 });
 
-
+// First Example with Serial
 test.describe.serial("Users API", () => {
     test("console token fixture", async ({ request }) => {
       const respToken = await request.post("/auth/token/", {
@@ -48,20 +49,5 @@ test.describe.serial("Users API", () => {
   
       console.log(users);
     });
-  });
-  
-  test("test with base request", async () => {
-    const apiRequest = await baseRequest.newContext();
-  
-    const respToken = await apiRequest.post("/auth/token", {
-      data: { username: "admin", password: "12345" },
-    });
-  
-    expect(respToken.status()).toBe(200);
-  
-    const respTokenJson = await respToken.json();
-    token = respTokenJson["token"];
-  
-    console.log(token);
   });
   
