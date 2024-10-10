@@ -1,4 +1,4 @@
-const Client = require("pg");
+const { Client } = require("pg");
 
 class DbHelper {
   constructor() {
@@ -12,7 +12,7 @@ class DbHelper {
 
   async getAllUsers() {
     const result = await this.client.query(
-      `SELECT username,first_name AS "firstName", last_name AS "lastName,email, role
+      `SELECT username,first_name AS "firstName", last_name AS "lastName",email, role
       FROM users`
     );
 
